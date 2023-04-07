@@ -4,10 +4,6 @@
 
 import 'dart:convert';
 
-Teslanews teslanewsFromJson(String str) => Teslanews.fromJson(json.decode(str));
-
-String teslanewsToJson(Teslanews data) => json.encode(data.toJson());
-
 class Teslanews {
   Teslanews({
     required this.status,
@@ -37,21 +33,21 @@ class Article {
     required this.source,
     this.author,
     required this.title,
-    this.description,
+    required this.description,
     required this.url,
     this.urlToImage,
     required this.publishedAt,
-    this.content,
+    required this.content,
   });
 
   Source source;
   String? author;
   String title;
-  String? description;
+  String description;
   String url;
   String? urlToImage;
   DateTime publishedAt;
-  String? content;
+  String content;
 
   factory Article.fromJson(Map<String, dynamic> json) => Article(
     source: Source.fromJson(json["source"]),
