@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:twitter_app/screens/homescreen/model/newsmodel.dart';
 
 import '../../../utils/apihelper.dart';
 import '../model/teslanews.dart';
@@ -6,12 +7,21 @@ import '../model/teslanews.dart';
 class Homeprovider extends ChangeNotifier
 {
   Teslanews? teslanews;
+  Newsmodel? newsmodel;
   int selectedBottomNavigationBarIndex = 0;
-  String company = "tesla";
+  String company = "google";
   Future<Teslanews?> teslaJsonParshing(company)
   async {
-    teslanews = await TeslaNewsHelper().teslaJsonNewsHelper(company);
+    teslanews = await NewsHelper().teslaJsonNewsHelper(company);
     return teslanews;
+    notifyListeners();
+    //return teslanews;
+  }
+
+  Future<Newsmodel?> NewsJsonParshing()
+  async {
+    newsmodel = await NewsHelper().CountryJsonNewsHelper();
+    return newsmodel;
     notifyListeners();
     //return teslanews;
   }

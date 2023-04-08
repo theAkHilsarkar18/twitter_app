@@ -2,6 +2,7 @@ import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:twitter_app/screens/homescreen/model/newsmodel.dart';
 import 'package:twitter_app/screens/homescreen/model/teslanews.dart';
 import 'package:twitter_app/screens/homescreen/provider/homeprovider.dart';
 
@@ -27,20 +28,21 @@ class _HomescreenState extends State<Homescreen> {
         backgroundColor: Colors.white,
         body: Center(
           child: FutureBuilder(
-            future: homeproviderFalse!.teslaJsonParshing(homeproviderTrue!.company),
+            future: homeproviderFalse!.NewsJsonParshing(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return Text("${snapshot.error}");
               } else if (snapshot.hasData) {
-                Teslanews? teslanews = snapshot.data;
-                List<Article> articleList = teslanews!.articles;
+                //Teslanews? teslanews = snapshot.data;
+                Newsmodel? newsmodel = snapshot.data;
+                List articleList = newsmodel!.articles;
                 return Column(
                   children: [
                     twitterAppBar(),
                     twitterTabbar(),
                     Divider(color: Colors.grey, thickness: 0.1),
                     Container(
-                      height: 548,
+                      height: 540,
                       child: ListView.builder(
                         physics: BouncingScrollPhysics(),
                         shrinkWrap: true,
@@ -65,7 +67,7 @@ class _HomescreenState extends State<Homescreen> {
         bottomNavigationBar: FlashyTabBar(
 
           animationDuration: Duration(milliseconds: 500),
-          iconSize: 25,
+          iconSize: 18,
           selectedIndex: homeproviderTrue!.selectedBottomNavigationBarIndex,
           onItemSelected: (value) {
             homeproviderFalse!.changeBottomNavigationBarIndex(value);
@@ -107,12 +109,12 @@ class _HomescreenState extends State<Homescreen> {
 
   Widget twitterAppBar() {
     return Container(
-      height: 77,
+      height: 89,
       child: Column(
         children: [
           Padding(
             padding:
-                const EdgeInsets.only(left: 15, top: 20, right: 15, bottom: 5),
+                const EdgeInsets.only(left: 15, top: 10, right: 15,),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -121,9 +123,17 @@ class _HomescreenState extends State<Homescreen> {
                   backgroundImage: AssetImage("assets/img/my.jpg"),
                 ),
                 Image.asset("assets/img/logo.png", height: 22),
-                Icon(
-                  Icons.more_vert,
-                  color: Colors.black,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(50),
+                  child: PopupMenuButton(
+                    itemBuilder: (context) {
+                      return [
+                        PopupMenuItem(child: Text("Google"),onTap: () => homeproviderFalse!.changeCompany("google"),),
+                        PopupMenuItem(child: Text("Apple"),onTap: () => homeproviderFalse!.changeCompany("apple"),),
+                        PopupMenuItem(child: Text("Tesla"),onTap: () => homeproviderFalse!.changeCompany("tesla"),),
+                      ];
+                    },
+                  ),
                 ),
               ],
             ),
@@ -158,7 +168,7 @@ class _HomescreenState extends State<Homescreen> {
     return Container(
       padding: EdgeInsets.all(10),
       margin: EdgeInsets.all(5),
-      height: 420,
+      height: 440,
       width: double.infinity,
       decoration: BoxDecoration(
         border: Border(
@@ -170,6 +180,7 @@ class _HomescreenState extends State<Homescreen> {
         children: [
           Column(children: [
             CircleAvatar(
+              backgroundColor: Colors.white,
               radius: 25,
               backgroundImage: NetworkImage("$profile"),
             )
@@ -189,7 +200,7 @@ class _HomescreenState extends State<Homescreen> {
                             fontWeight: FontWeight.w500,
                             fontSize: 14)),
                     SizedBox(width: 2,),
-                    index%2==0?Icon(Icons.verified,color: Colors.blue,size: 15,):Text(""),
+                    index%3==0?Icon(Icons.verified,color: Colors.blue,size: 15,):Text(""),
                     SizedBox(width: 2,),
                     Spacer(),
                     Icon(
