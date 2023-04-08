@@ -8,7 +8,7 @@ class TeslaNewsHelper
   Teslanews? teslanews;
   Future<Teslanews?> teslaJsonNewsHelper(String company)
   async {
-    String? apiLink = "https://newsapi.org/v2/everything?q=$company&from=2023-03-07&sortBy=publishedAt&apiKey=fc64b5f2f1d34ac69201d7af2469952c";
+    String? apiLink = "https://newsapi.org/v2/everything?q=$company&from=2023-03-08&sortBy=publishedAt&apiKey=fc64b5f2f1d34ac69201d7af2469952c";
     Uri apiUrl = Uri.parse(apiLink);
     var response = await http.get(apiUrl);
     var json = jsonDecode(response.body);

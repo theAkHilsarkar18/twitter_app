@@ -45,13 +45,14 @@ class _HomescreenState extends State<Homescreen> {
                         physics: BouncingScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (context, index) => twitterPostBox(
-                          articleList[index].urlToImage!,
-                          articleList[index].urlToImage!,
-                          articleList[index].source.name,
-                          articleList[index].author!,
+                          articleList[index].urlToImage==null?"https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1":articleList[index].urlToImage!,
+                          articleList[index].urlToImage==null?"https://cdn-res.keymedia.com/cms/images/us/035/0308_637789099633579656.png":articleList[index].urlToImage!,
+                          articleList[index].source.name==null?"TheAkhilSarkar":articleList[index].source.name,
+                          articleList[index].author==null?"theakhilsarkar":articleList[index].author!,
                           articleList[index].title,
+                          index,
                         ),
-                        itemCount: 10,
+                        itemCount: articleList.length,
                       ),
                     ),
                   ],
@@ -77,28 +78,7 @@ class _HomescreenState extends State<Homescreen> {
             ),
             FlashyTabBarItem(
               activeColor: Colors.blue,
-              icon: InkWell(onTap: () {
-                showDialog(context: context, builder: (context) {
-                  return AlertDialog(
-                    content: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        TextButton(onPressed: () {
-                          homeproviderFalse!.changeCompany("apple");
-                        }, child: Text("apple"),),
-                        TextButton(onPressed: () {
-                          homeproviderFalse!.changeCompany("google");
-
-                        }, child: Text("Google"),),
-                        TextButton(onPressed: () {
-                          homeproviderFalse!.changeCompany("tesla");
-                        }, child: Text("Tesla"),),
-                      ],
-                    ),
-                  );
-                },);
-                homeproviderFalse!.changeBottomNavigationBarIndex(2);
-              },child: Icon(Icons.search)),
+              icon: Icon(Icons.search),
               title: Text('Search'),
             ),
             FlashyTabBarItem(
@@ -174,7 +154,7 @@ class _HomescreenState extends State<Homescreen> {
   }
 
   Widget twitterPostBox(String profile, String post, String accountName,
-      String username, String title) {
+      String username, String title,int index) {
     return Container(
       padding: EdgeInsets.all(10),
       margin: EdgeInsets.all(5),
@@ -208,6 +188,9 @@ class _HomescreenState extends State<Homescreen> {
                             color: Colors.black,
                             fontWeight: FontWeight.w500,
                             fontSize: 14)),
+                    SizedBox(width: 2,),
+                    index%2==0?Icon(Icons.verified,color: Colors.blue,size: 15,):Text(""),
+                    SizedBox(width: 2,),
                     Spacer(),
                     Icon(
                       Icons.more_vert,
@@ -216,7 +199,7 @@ class _HomescreenState extends State<Homescreen> {
                     ),
                   ],
                 ),
-                Text("  @$username",
+                Text(" @$username",
                     style:
                         GoogleFonts.poppins(color: Colors.grey, fontSize: 11)),
                 SizedBox(
