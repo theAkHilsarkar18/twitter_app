@@ -19,9 +19,9 @@ class NewsHelper
     return teslanews;
   }
 
-  Future<Newsmodel?> CountryJsonNewsHelper()
+  Future<Newsmodel?> CountryJsonNewsHelper(String country)
   async {
-    String? apiLink = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=fc64b5f2f1d34ac69201d7af2469952c";
+    String? apiLink = "https://newsapi.org/v2/top-headlines?country=${country}&category=business&apiKey=fc64b5f2f1d34ac69201d7af2469952c";
     Uri apiUrl = Uri.parse(apiLink);
     var response = await http.get(apiUrl);
     var json = jsonDecode(response.body);

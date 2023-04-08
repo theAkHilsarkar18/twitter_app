@@ -18,9 +18,9 @@ class Homeprovider extends ChangeNotifier
     //return teslanews;
   }
 
-  Future<Newsmodel?> NewsJsonParshing()
+  Future<Newsmodel?> NewsJsonParshing(String country)
   async {
-    newsmodel = await NewsHelper().CountryJsonNewsHelper();
+    newsmodel = await NewsHelper().CountryJsonNewsHelper(country);
     return newsmodel;
     notifyListeners();
     //return teslanews;

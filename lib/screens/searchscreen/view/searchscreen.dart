@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:twitter_app/screens/basescreen/provider/baseprovider.dart';
 import 'package:twitter_app/screens/searchscreen/provider/searchprovider.dart';
 
 class Searchscreen extends StatefulWidget {
@@ -190,6 +191,8 @@ class _BuisnesscreenState extends State<Buisnesscreen> {
   Widget build(BuildContext context) {
     Searchprovider searchproviderTrue = Provider.of(context, listen: true);
     Searchprovider searchproviderFalse = Provider.of(context, listen: false);
+    Baseprovider baseproviderTrue = Provider.of(context, listen: true);
+    Baseprovider baseproviderFalse = Provider.of(context, listen: true);
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -211,11 +214,17 @@ class _BuisnesscreenState extends State<Buisnesscreen> {
             ),
             ListView.builder(
               physics: BouncingScrollPhysics(),
-              itemBuilder: (context, index) => topList(
-                searchproviderTrue.buisnessCategoryList[index],
-                searchproviderTrue.buisnessHastagList[index],
-                searchproviderTrue.trendingTweetCount[index],
-                index+1,
+              itemBuilder: (context, index) => InkWell(
+                onTap: () {
+                  searchproviderFalse.changeBuisnessNews(searchproviderTrue.countryList[index]);
+                  baseproviderFalse.changeScreenIndex(0);
+                },
+                child: topList(
+                  searchproviderTrue.buisnessCategoryList[index],
+                  searchproviderTrue.buisnessHastagList[index],
+                  searchproviderTrue.trendingTweetCount[index],
+                  index+1,
+                ),
               ),
               itemCount: 5,
               shrinkWrap: true,

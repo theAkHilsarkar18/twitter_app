@@ -6,6 +6,8 @@ import 'package:twitter_app/screens/homescreen/model/newsmodel.dart';
 import 'package:twitter_app/screens/homescreen/model/teslanews.dart';
 import 'package:twitter_app/screens/homescreen/provider/homeprovider.dart';
 
+import '../../searchscreen/provider/searchprovider.dart';
+
 class Homescreen extends StatefulWidget {
   const Homescreen({Key? key}) : super(key: key);
 
@@ -23,12 +25,14 @@ class _HomescreenState extends State<Homescreen> {
   Widget build(BuildContext context) {
     homeproviderTrue = Provider.of(context, listen: true);
     homeproviderFalse = Provider.of(context, listen: false);
+    Searchprovider searchproviderTrue = Provider.of(context, listen: true);
+    Searchprovider searchproviderFalse = Provider.of(context, listen: false);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Center(
           child: FutureBuilder(
-            future: homeproviderFalse!.NewsJsonParshing(),
+            future: homeproviderFalse!.NewsJsonParshing("${searchproviderTrue.country}"),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return Text("${snapshot.error}");

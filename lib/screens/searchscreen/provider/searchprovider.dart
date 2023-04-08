@@ -77,4 +77,31 @@ List HealthHastagList = [
   "#YoungsterOnFire",
 ];
   //======================================================================================
+
+  String country = "us";
+
+  List countryList = [
+    "in",
+    "us",
+    "cn",
+    "uae",
+    "au",
+  ];
+
+void changeBuisnessNews(String country)
+{
+  this.country = country;
+  notifyListeners();
+}
+
+
+
+
+
+
+
+
+
+
+
 }
