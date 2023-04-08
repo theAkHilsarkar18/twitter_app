@@ -42,7 +42,7 @@ class _HomescreenState extends State<Homescreen> {
                     twitterTabbar(),
                     Divider(color: Colors.grey, thickness: 0.1),
                     Container(
-                      height: 540,
+                      height: 555,
                       child: ListView.builder(
                         physics: BouncingScrollPhysics(),
                         shrinkWrap: true,
@@ -64,47 +64,47 @@ class _HomescreenState extends State<Homescreen> {
             },
           ),
         ),
-        bottomNavigationBar: FlashyTabBar(
-
-          animationDuration: Duration(milliseconds: 500),
-          iconSize: 18,
-          selectedIndex: homeproviderTrue!.selectedBottomNavigationBarIndex,
-          onItemSelected: (value) {
-            homeproviderFalse!.changeBottomNavigationBarIndex(value);
-          },
-          items: [
-            FlashyTabBarItem(
-              activeColor: Colors.blue,
-              icon: Icon(Icons.home),
-              title: Text('Home'),
-            ),
-            FlashyTabBarItem(
-              activeColor: Colors.blue,
-              icon: Icon(Icons.search),
-              title: Text('Search'),
-            ),
-            FlashyTabBarItem(
-              activeColor: Colors.blue,
-
-              icon: Icon(Icons.mic_none_outlined),
-              title: Text('Voice'),
-            ),
-            FlashyTabBarItem(
-              activeColor: Colors.blue,
-
-              icon: Icon(Icons.notifications_none),
-              title: Text('Tweets'),
-            ),
-            FlashyTabBarItem(
-              activeColor: Colors.blue,
-
-              icon: Icon(Icons.mail_outline),
-              title: Text('Inbox'),
-            ),
-          ],
         ),
-      ),
-    );
+        // bottomNavigationBar: FlashyTabBar(
+        //
+        //   animationDuration: Duration(milliseconds: 500),
+        //   iconSize: 18,
+        //   selectedIndex: homeproviderTrue!.selectedBottomNavigationBarIndex,
+        //   onItemSelected: (value) {
+        //     homeproviderFalse!.changeBottomNavigationBarIndex(value);
+        //   },
+        //   items: [
+        //     FlashyTabBarItem(
+        //       activeColor: Colors.blue,
+        //       icon: Icon(Icons.home),
+        //       title: Text('Home'),
+        //     ),
+        //     FlashyTabBarItem(
+        //       activeColor: Colors.blue,
+        //       icon: Icon(Icons.search),
+        //       title: Text('Search'),
+        //     ),
+        //     FlashyTabBarItem(
+        //       activeColor: Colors.blue,
+        //
+        //       icon: Icon(Icons.mic_none_outlined),
+        //       title: Text('Voice'),
+        //     ),
+        //     FlashyTabBarItem(
+        //       activeColor: Colors.blue,
+        //
+        //       icon: Icon(Icons.notifications_none),
+        //       title: Text('Tweets'),
+        //     ),
+        //     FlashyTabBarItem(
+        //       activeColor: Colors.blue,
+        //
+        //       icon: Icon(Icons.mail_outline),
+        //       title: Text('Inbox'),
+        //     ),
+        //   ],
+        // ),
+      );
   }
 
   Widget twitterAppBar() {
